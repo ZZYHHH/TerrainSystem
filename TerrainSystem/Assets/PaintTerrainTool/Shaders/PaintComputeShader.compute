@@ -1,0 +1,311 @@
+﻿//https://www.w3.org/TR/SVGCompositing/
+/**PhotoShop BlendMode functions**/
+//正常
+float3 normal(float3 s, float3 d,float a)
+{
+	return lerp(s,d,a);
+}
+//变暗
+float3 darken( float3 s, float3 d )
+{
+	return min(s,d);
+}
+//正片叠底
+float3 multiply( float3 s, float3 d )
+{
+	return s*d;
+}
+//颜色加深
+float3 colorBurn( float3 s, float3 d )
+{
+	return 1.0 - (1.0 - d) / s;
+}
+//线性加深
+float3 linearBurn( float3 s, float3 d )
+{
+	return s + d - 1.0;
+}
+//深色
+float3 darkerColor( float3 s, float3 d )
+{
+	return (s.x + s.y + s.z < d.x + d.y + d.z) ? s : d;
+}
+//变亮
+float3 lighten( float3 s, float3 d )
+{
+	return max(s,d);
+}
+//滤色
+float3 screen( float3 s, float3 d )
+{
+	return s + d - s * d;
+}
+//颜色减淡
+float3 colorDodge( float3 s, float3 d )
+{
+	return s==1.0?s:min(1.0,d/(1.0-s));
+	//return d / (1.0 - s);
+}
+//线性减淡（添加）
+float3 linearDodge( float3 s, float3 d )
+{
+	return s + d;
+}
+//浅色
+float3 lighterColor( float3 s, float3 d )
+{
+	return (s.x + s.y + s.z > d.x + d.y + d.z) ? s : d;
+}
+//叠加
+float overlay( float s, float d )
+{
+	return (d < 0.5) ? 2.0 * s * d : 1.0 - 2.0 * (1.0 - s) * (1.0 - d);
+}
+float3 overlay( float3 s, float3 d )
+{
+	float3 c;
+	c.x = overlay(s.x,d.x);
+	c.y = overlay(s.y,d.y);
+	c.z = overlay(s.z,d.z);
+	return c;
+}
+//柔光
+float softLight( float s, float d )
+{
+	//return d<0.5? 2*s*d + s*s*(1-2*d):2*s*(1-d)+sqrt(s)*(2*d-1);
+
+
+	return (s < 0.5) ? d - (1.0 - 2.0 * s) * d * (1.0 - d) 
+		: (d < 0.25) ? d + (2.0 * s - 1.0) * d * ((16.0 * d - 12.0) * d + 3.0) 
+						: d + (2.0 * s - 1.0) * (sqrt(d) - d);
+						
+}
+float3 softLight( float3 s, float3 d )
+{
+	float3 c;
+	c.x = softLight(s.x,d.x);
+	c.y = softLight(s.y,d.y);
+	c.z = softLight(s.z,d.z);
+	return c;
+}
+//强光
+float hardLight( float s, float d )
+{
+	return (s < 0.5) ? 2.0 * s * d : 1.0 - 2.0 * (1.0 - s) * (1.0 - d);
+}
+float3 hardLight( float3 s, float3 d )
+{
+	float3 c;
+	c.x = hardLight(s.x,d.x);
+	c.y = hardLight(s.y,d.y);
+	c.z = hardLight(s.z,d.z);
+	return c;
+}
+//亮光
+float vividLight( float s, float d )
+{
+	return (s < 0.5) ? 1.0 - (1.0 - d) / (2.0 * s) : d / (2.0 * (1.0 - s));
+}
+float3 vividLight( float3 s, float3 d )
+{
+	float3 c;
+	c.x = vividLight(s.x,d.x);
+	c.y = vividLight(s.y,d.y);
+	c.z = vividLight(s.z,d.z);
+	return c;
+}
+//线性光
+float3 linearLight( float3 s, float3 d )
+{
+	return 2.0 * s + d - 1.0;
+}
+//点光
+float pinLight( float s, float d )
+{
+	return (2.0 * s - 1.0 > d) ? 2.0 * s - 1.0 : (s < 0.5 * d) ? 2.0 * s : d;
+}
+float3 pinLight( float3 s, float3 d )
+{
+	float3 c;
+	c.x = pinLight(s.x,d.x);
+	c.y = pinLight(s.y,d.y);
+	c.z = pinLight(s.z,d.z);
+	return c;
+}
+//实色混合
+float3 hardlerp( float3 s, float3 d )
+{
+	return floor(s + d);
+}
+//差值
+float3 difference( float3 s, float3 d )
+{
+	return abs(d - s);
+}
+//排除
+float3 exclusion( float3 s, float3 d )
+{
+	return s + d - 2.0 * s * d;
+}
+//减去
+float3 subtract( float3 s, float3 d )
+{
+	return s - d;
+}
+//划分
+float3 divide( float3 s, float3 d )
+{
+	return s / d;
+}
+//色相
+float3 rgb2hsv(float3 c)
+{
+	float4 K = float4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+	float4 p = lerp(float4(c.bg, K.wz), float4(c.gb, K.xy), step(c.b, c.g));
+	float4 q = lerp(float4(p.xyw, c.r), float4(c.r, p.yzx), step(p.x, c.r));				
+	float d = q.x - min(q.w, q.y);
+	float e = 1.0e-10;
+	return float3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+}
+float3 hsv2rgb(float3 c)
+{
+	float4 K = float4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+	float3 p = abs(frac(c.xxx + K.xyz) * 6.0 - K.www);
+	return c.z * lerp(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+}
+float3 hue( float3 s, float3 d )
+{
+	d = rgb2hsv(d);
+	d.x = rgb2hsv(s).x;
+	return hsv2rgb(d);
+}
+//饱和度
+float3 saturation( float3 s, float3 d )
+{
+	d = rgb2hsv(d);
+	d.y = rgb2hsv(s).y;
+	return hsv2rgb(d);
+}
+
+//颜色
+float3 color( float3 s, float3 d )
+{
+	s = rgb2hsv(s);
+	s.z = rgb2hsv(d).z;
+	return hsv2rgb(s);
+}
+//明度
+float3 luminosity( float3 s, float3 d )
+{
+	float dLum = dot(d, float3(0.3, 0.59, 0.11));
+	float sLum = dot(s, float3(0.3, 0.59, 0.11));
+	float lum = sLum - dLum;
+	float3 c = d + lum;
+	float minC = min(min(c.x, c.y), c.z);
+	float maxC = max(max(c.x, c.y), c.z);
+	if(minC < 0.0) return sLum + ((c - sLum) * sLum) / (sLum - minC);
+	else if(maxC > 1.0) return sLum + ((c - sLum) * (1.0 - sLum)) / (maxC - sLum);
+	else return c;
+}
+
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+Texture2D<float4> TextureInput;
+//SamplerState texture_point_clamp_sampler;
+
+RWTexture2D<float4> TextureOutput;
+vector <float, 4> Color;
+vector<float, 2> UV;
+float Radius;
+//float RadiusFalloff;
+float Aspect;
+
+Texture2D<float4> BrushTex;
+float2 BrushTexSize;
+
+/*
+float LinearFallOff(float distance, float brushRadius, float radiusFalloff)
+{
+	float falloff = clamp(1-distance/brushRadius , 0, 1);
+	return pow(falloff, radiusFalloff * 3);// falloff;// 
+}
+*/
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+	float2 dist0 = float2((id.x - UV.x), (id.y - UV.y) * Aspect);
+	//float Distance = length(dist0);
+	//float4 AdditionalColor = (Distance<=Radius)? Color : float4(0,0,0,0);
+	//float lerpVal = LinearFallOff(Distance, Radius, RadiusFalloff) * Color.a;
+	//TextureOutput[id.xy] = lerp(TextureInput.Load(id), Color,lerpVal*AdditionalColor.a*Color.a);
+	float2 newUV = dist0/Radius + BrushTexSize * 0.5;
+	float lerpValue = BrushTex.Load(float3(newUV,0)).a * Color.a;
+	TextureOutput[id.xy] = lerp(TextureInput.Load(id), Color, lerpValue);
+}
+
+
+Texture2D<float4> LightMap;
+Texture2D<float4> PaintingLightMapInput;
+RWTexture2D<float4> PaintingLightMapOutput;
+RWTexture2D<float4> FinalLightMap;
+int BlendModeIndex;
+Texture2D<float4> BrushTex2;
+
+#pragma kernel PhotoShopBlendCSMain
+
+[numthreads(8,8,1)]
+void PhotoShopBlendCSMain (uint3 id : SV_DispatchThreadID)
+{
+	float2 dist0 = float2((id.x - UV.x), (id.y - UV.y) * Aspect);
+	float2 newUV = dist0/Radius + BrushTexSize * 0.5;
+		
+	float lerpValue = BrushTex2.Load(float3(newUV,0)).a * Color.a;
+	
+	float4 outColor = lerp(PaintingLightMapInput.Load(id),Color,lerpValue);
+
+	PaintingLightMapOutput[id.xy] = outColor;
+	
+
+	float4 lightmapCol = LightMap.Load(id);
+
+	float3 sourceCol = lightmapCol.rgb;
+	float3 destCol = outColor.rgb;
+	
+	//float alphaChannel = lerp(lightmapCol.a, outColor.a,lerpValue);
+	
+	float3 finalCol = float3(0,0,0);
+	
+	     if (BlendModeIndex==0)  finalCol = normal          (sourceCol,destCol, outColor.a );
+	else if (BlendModeIndex==1)  finalCol = darken          (sourceCol,destCol );
+	else if (BlendModeIndex==2)  finalCol = multiply		(sourceCol,destCol );
+	else if (BlendModeIndex==3)  finalCol = colorBurn       (sourceCol,destCol );
+	else if (BlendModeIndex==4)  finalCol = linearBurn      (sourceCol,destCol );
+	else if (BlendModeIndex==5)  finalCol = darkerColor     (sourceCol,destCol );
+	else if (BlendModeIndex==6)  finalCol = lighten         (sourceCol,destCol );
+	else if (BlendModeIndex==7)  finalCol = screen          (sourceCol,destCol );
+	else if (BlendModeIndex==8)  finalCol = colorDodge      (sourceCol,destCol );
+	else if (BlendModeIndex==9)  finalCol = linearDodge     (sourceCol,destCol );
+	else if (BlendModeIndex==10) finalCol = lighterColor    (sourceCol,destCol );
+	else if (BlendModeIndex==11) finalCol = overlay         (sourceCol,destCol );
+	else if (BlendModeIndex==12) finalCol = softLight       (sourceCol,destCol );
+	else if (BlendModeIndex==13) finalCol = hardLight       (sourceCol,destCol );
+	else if (BlendModeIndex==14) finalCol = vividLight      (sourceCol,destCol );
+	else if (BlendModeIndex==15) finalCol = linearLight     (sourceCol,destCol );
+	else if (BlendModeIndex==16) finalCol = pinLight        (sourceCol,destCol );
+	else if (BlendModeIndex==17) finalCol = hardlerp        (sourceCol,destCol );
+	else if (BlendModeIndex==18) finalCol = difference      (sourceCol,destCol );
+	else if (BlendModeIndex==19) finalCol = exclusion       (sourceCol,destCol );
+	else if (BlendModeIndex==20) finalCol = subtract        (sourceCol,destCol );
+	else if (BlendModeIndex==21) finalCol = divide          (sourceCol,destCol );
+	else if (BlendModeIndex==22) finalCol = hue             (sourceCol,destCol );
+	else if (BlendModeIndex==23) finalCol = saturation      (sourceCol,destCol );
+	else if (BlendModeIndex==24) finalCol = color           (sourceCol,destCol );
+	else if (BlendModeIndex==25) finalCol = luminosity      (sourceCol,destCol );
+	
+
+	FinalLightMap[id.xy] = lerp(lightmapCol,float4(finalCol,1), outColor.a);
+}

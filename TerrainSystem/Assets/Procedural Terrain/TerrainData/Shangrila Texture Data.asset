@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24bba47da550c4e86a3c8ae5cf2e264d, type: 3}
+  m_Name: Shangrila Texture Data
+  m_EditorClassIdentifier: 
+  autoUpdate: 1
+  layers:
+  - texture: {fileID: 2800000, guid: 1ce19a780d0cb2942bda76b650e48b64, type: 3}
+    tint: {r: 0.45098042, g: 0.6156863, b: 0.72156864, a: 1}
+    tintStrength: 0
+    startHeight: 0
+    blendStrength: 0
+    textureScale: 0
+  - texture: {fileID: 2800000, guid: a75fe0f9bb83f7f42bd84e50724b11fa, type: 3}
+    tint: {r: 0.64705884, g: 0.5764706, b: 0.46274513, a: 1}
+    tintStrength: 0
+    startHeight: 0.027
+    blendStrength: 0
+    textureScale: 10
+  - texture: {fileID: 2800000, guid: 2761ecbcb7859d6499f5384c26b6d9d9, type: 3}
+    tint: {r: 0.16484487, g: 0.6037736, b: 0, a: 0}
+    tintStrength: 0
+    startHeight: 0.031
+    blendStrength: 0
+    textureScale: 3
+  - texture: {fileID: 2800000, guid: 9e4eaa0be68cacc4f83d1c0ec29adfa9, type: 3}
+    tint: {r: 0.07392785, g: 0.4528302, b: 0.019223915, a: 0}
+    tintStrength: 0
+    startHeight: 0.578
+    blendStrength: 0.207
+    textureScale: 3

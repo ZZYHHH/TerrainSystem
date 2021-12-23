@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: tx_bld_tokyo_ground_intro_02_mask
+  m_Shader: {fileID: 4800000, guid: 59c51a80092431f439b6f6e885751419, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Control:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 9f35629b9bbde0c47b48b28b0f249e00, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SandRimTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowBlob:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Splat0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Splat1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Splat2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Splat3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WholeDiffuse:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WholeNormal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BlendWeight: 0.8
+    m_Colors:
+    - _AmbientColor1: {r: 0.5, g: 0.5, b: 0.6, a: 1}
+    - _AmbientColor2: {r: 0.5, g: 0.5, b: 0.6, a: 1}
+    - _AmbientColor3: {r: 0.5, g: 0.5, b: 0.6, a: 1}
+    - _AmbientColor4: {r: 0.5, g: 0.5, b: 0.6, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Debug: {r: 0, g: 0, b: 0, a: 0}
+    - _DebugGray: {r: 0, g: 0, b: 0, a: 0}
+    - _DebugSpec: {r: 1, g: 0, b: 0, a: 0}
+    - _FadeNearFar: {r: 210, g: 420, b: 0, a: 0}
+    - _Gloss: {r: 1, g: 1, b: 1, a: 1}
+    - _GrayFrom1: {r: 1, g: 1, b: 1, a: 1}
+    - _GrayFrom2: {r: 0, g: 0, b: 0, a: 0}
+    - _GrayFrom3: {r: 0, g: 0, b: 0, a: 0}
+    - _HeightHigh: {r: 0.3, g: 0.4, b: 0.7, a: 0.45}
+    - _HeightLow: {r: 0.2, g: 0, b: 0.5, a: 0.2}
+    - _SandColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SoliColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor1: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor2: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor3: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor4: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecFrom1: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecFrom2: {r: 0, g: 0, b: 0, a: 0}
+    - _SpecFrom3: {r: 0, g: 0, b: 0, a: 0}
+    - _SpecHigh: {r: 0.3, g: 0.4, b: 0.7, a: 0.45}
+    - _SpecLow: {r: 0.2, g: 0, b: 0.5, a: 0.2}
+    - _SpecPower: {r: 1, g: 1, b: 1, a: 1}
+    - _Tilling: {r: 1, g: 1, b: 1, a: 1}
+    - _WholeAmbientColor: {r: 1, g: 1, b: 1, a: 1}
